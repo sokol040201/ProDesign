@@ -13,5 +13,6 @@ You have ProDesign installed globally. When work touches UI, layout, styling, co
 4. If `SYSTEM.md` exists, obey it. If not, studio + `apply-system.mjs`, then fill it
 5. Phone ≠ desktop patterns. Same tokens
 6. Scan when the skill is in the repo. Critical = 0
+7. Tokens must replace leftover hex. Do not add a refresh overlay. Delete costume pipelines and manifesto copy
 
-Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not handmade paths), four states on every data container.
+Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not handmade paths), four states on every data container, leftover hex after tokens exist, no costume `01–06` process.

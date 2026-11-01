@@ -29,6 +29,8 @@ node scripts/apply-system.mjs /path/to/product
 
 Then fill `SYSTEM.md`. If tokens already exist, keep them. Map the product’s existing controls onto roles. A starter-kit gray theme is not a brand.
 
+`tokens.css` sitting next to leftover hex, a `design-refresh.css` overlay, or a second `:root` palette is **not** a system. Restyle the product stylesheet.
+
 ## Minimum system
 
 Named decisions, not a component folder. `SYSTEM.md` must lock all of this, not leave blanks:

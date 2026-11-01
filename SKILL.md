@@ -27,7 +27,9 @@ These are not style preferences.
 4. **Every data container has states.** List, table, inbox, search, chart, folder: loading, empty, empty-result, error. A blank box is a defect.
 5. **No leftover OS chrome.** Select, checkbox, radio, date, time, file, and range use the product tokens: same height, radius, type, border, and focus as the text field. An unstyled native `<select>` is a defect. `appearance: none` + tokens, or a combobox built on the system. Do not ship the browser’s default control.
 6. **Type floors.** Web body **16 / 24**. Working chrome (nav, button, field, row title) **≥ 14**. Caption **12** only for meta. `text-xs`, 11 px body, or `html { font-size: 14px }` that shrinks the app is a defect. Dense is tighter space, not tiny type.
-7. **No manifesto on a working screen.** The H1 is the place name (`Materials`, `Invoices`), not a slogan. Delete the overline, the subtitle that restates the nav, the footer reassurance, and the mascot. If the UI is clear, the sentence goes.
+7. **No manifesto on a working screen.** The H1 is the place name (`Materials`, `Invoices`), not a slogan. Delete the overline, the subtitle that restates the nav, the footer reassurance, and the mascot. The sidebar is **mark + places + account** — no workspace card, shield sermon, or “you’re in control”. If the UI is clear, the sentence goes.
+8. **Tokens replace the old look.** `tokens.css` next to leftover hex, a second `:root` palette, or a `design-refresh.css` overlay is **not** applied. Edit the product stylesheet. Every color, radius, and space is a token. Off-scale padding (`13px`, `20px`, `15px`) is a defect.
+9. **No costume process.** Numbered `01–06` circles with arrows, a “production line” strip, or decorative pills under a slogan are not a wizard. Use a list, a table, or a real step the person is in.
 
 ## Job
 
@@ -42,7 +44,7 @@ When this skill is attached, **do the work in the product**. Finish only when:
 5. Data containers have the four states
 6. Controls match [elements.md](docs/ui/elements.md) — restyled, not OS-native
 7. Type meets the floors. No Inter-by-default
-8. Working screens have no slogan H1, overline, or extra explanation
+8. Working screens have no slogan H1, overline, extra explanation, costume pipeline, or leftover hex beside tokens
 
 Do not stop at a report. A report is the last step, after the fixes.
 
@@ -141,18 +143,20 @@ Then read [slop.md](docs/slop.md) and [audit.md](docs/audit.md). The script is a
 
 ### 6. Fix and systemize
 
-Edit the product.
+Edit the product’s **real** CSS and markup. Do not add `design-refresh.css` or a second `:root` palette.
 
-1. Bans: gradients, emoji, fake icons, OS chrome, tiny type, manifesto copy
-2. Contrast and target size
-3. Snap space, radius, and type to tokens
-4. One primary accent per screen
-5. Loading / empty / empty-result / error — in the product’s own views
-6. One **pattern** per job — start at [apply.md](docs/apply.md). Named part → [elements.md](docs/ui/elements.md). User job (sign in, pay, create, share) → [flows.md](docs/ui/flows.md). Then [navigation.md](docs/ui/navigation.md), [states.md](docs/ui/states.md), [behavior.md](docs/ui/behavior.md). Keep the product’s controls; fix how they are used
-7. Strip decorative slop (glass, glow, bento-for-its-own-sake)
-8. Perception, charts, copy → [psychology.md](docs/craft/psychology.md), [charts.md](docs/craft/charts.md), [copy.md](docs/craft/copy.md)
+**Restyle pass — tokens.css is not the finish.** Do not stop after apply-system.
 
-Do not replace one cliché with another. After purple gradient, do not reach for cream-and-amber unless that is the brand.
+1. Delete leftover hex / rgb in working CSS. Every color is a token from `SYSTEM.md`
+2. Snap padding, margin, gap to the 4/8 scale. One page gutter. No `13px` / `15px` / `20px` leftovers
+3. Restyle every control to field tokens. OS chrome is a defect
+4. Delete manifesto, overline, costume pipeline (`01–06` circles), mascot essays, decorative pills
+5. Sidebar = mark + places + account
+6. Type floors. One accent
+7. Loading / empty / empty-result / error — in the product’s own views
+8. One **pattern** per job — [apply.md](docs/apply.md) → [elements.md](docs/ui/elements.md) / [flows.md](docs/ui/flows.md)
+
+A tokens file imported next to leftover olive, leftover blue, or Inter is not applied.
 
 ### 7. Verify
 

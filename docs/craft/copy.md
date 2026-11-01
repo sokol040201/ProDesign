@@ -44,6 +44,7 @@ Delete:
 - The footer caption that restates a rule already in the UI
 - “How this works” on a screen that already has a primary action
 - Empty-state essays. Title + one line + one verb
+- Sidebar cards that preach (“the last word is yours”, “local on your Mac”)
 
 Keep: the object name, the verb, the state, the error.
 

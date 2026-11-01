@@ -6,6 +6,9 @@ export function Hero() {
         Unlock the future ✨
       </h1>
       <p className="text-xs">Everything in one place. Seamless journey.</p>
+      <p className="pipeline-flow" style={{ color: "#2459d8" }}>
+        01 Sources
+      </p>
       <select>
         <option>Pick a plan</option>
       </select>

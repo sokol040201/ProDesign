@@ -27,6 +27,11 @@ const SKIP_DIR = new Set([
   "tests",
   "docs",
   "studio",
+  ".venv",
+  "venv",
+  "__pycache__",
+  ".tox",
+  "site-packages",
 ]);
 const EXT = new Set([
   ".js",
@@ -154,15 +159,53 @@ export const RULES = [
     id: "manifesto-copy",
     severity: "critical",
     message: "Landing slogan on a working screen — H1 is the place name, delete the mission line",
-    re: /От идеи до|под вашим контролем|всё под контролем|на автопилоте|в одном месте|Unlock the|seamless|your journey|next-gen|Everything in one place/i,
+    re: /От идеи до|под вашим контролем|всё под контролем|на автопилоте|в одном месте|Unlock the|seamless|your journey|next-gen|Everything in one place|маленький робот|большое любопытство|новая визуальная система|dela gothic|одна тема[ —–-]+несколько|для каждой площадки будет/i,
   },
   {
     id: "overline-eyebrow",
-    severity: "should",
+    severity: "critical",
     message: "Overline / eyebrow above the title — delete it",
     re: /class(Name)?=["'][^"']*eyebrow|tracking-widest|uppercase tracking-/,
   },
+  {
+    id: "sidebar-sermon",
+    severity: "should",
+    message: "Sidebar is mark + places + account — delete manifesto / env / workspace cards",
+    re: /последнее слово|локально на вашем|you're in control|last word is yours|personal (studio|edition)|рабочее пространство/i,
+  },
+  {
+    id: "leftover-hex",
+    severity: "critical",
+    message: "Leftover hex — restyle onto tokens. Do not add an overlay file",
+    re: /#[0-9a-fA-F]{3,8}\b/,
+    skipFile: /(?:^|[/\\])(?:tokens|look)\.(?:css|scss|sass|less|ts)$/i,
+    aggregate: true,
+  },
+  {
+    id: "second-palette",
+    severity: "critical",
+    message: "Second :root palette — edit tokens.css / look.css, delete the overlay",
+    re: /--pd-color-(?:canvas|surface|text|text-muted|border|accent|focus)\s*:/,
+    skipFile: /(?:^|[/\\])(?:tokens|look)\.(?:css|scss|sass|less|ts)$/i,
+  },
+  {
+    id: "costume-pipeline",
+    severity: "critical",
+    message: "Costume process (01–06 circles / pipeline) — a list or a wizard the person is in",
+    re: /pipeline-node|pipeline-flow|pipeline-number|производственная линия|production[- ](?:strip|line)/i,
+  },
+  {
+    id: "magic-space-css",
+    severity: "should",
+    message: "Off-scale CSS space — snap padding/margin/gap to 4/8",
+    re: /(?:padding|margin|gap)\s*:[^;{]*\b(?:1[13579]|2[013579]|3[13579]|5|7|9|10|11|13|14|15|17|18|19|20|21|22|23|26|28|30)px\b/,
+    skipFile: /(?:^|[/\\])(?:tokens|look)\.(?:css|scss|sass|less|ts)$/i,
+    aggregate: true,
+  },
 ];
+
+const OVERLAY_FILE =
+  /(?:^|[/\\])(?:design-refresh|look-refresh|tokens-override|prodesign-override)\.(?:css|scss)$/i;
 
 function walk(dir, root, out = []) {
   let entries;
@@ -187,24 +230,54 @@ function walk(dir, root, out = []) {
 }
 
 function scanFile(file, root) {
+  const rel = path.relative(root, file);
   const text = fs.readFileSync(file, "utf8");
   const lines = text.split(/\r?\n/);
   const hits = [];
+  const buckets = new Map();
+  if (OVERLAY_FILE.test(rel)) {
+    hits.push({
+      file: rel,
+      line: 1,
+      id: "restyle-overlay",
+      severity: "critical",
+      message: "Overlay CSS — edit the product stylesheet, do not pile a refresh file on leftover look",
+      sample: rel,
+    });
+  }
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (!line.trim() || /^\s*\/\//.test(line) || /^\s*\*/.test(line)) continue;
     for (const rule of RULES) {
+      if (rule.skipFile && rule.skipFile.test(rel)) continue;
+      if (rule.skipLine && rule.skipLine.test(line)) continue;
       if (rule.re.test(line)) {
-        hits.push({
-          file: path.relative(root, file),
+        const hit = {
+          file: rel,
           line: i + 1,
           id: rule.id,
           severity: rule.severity,
           message: rule.message,
           sample: line.trim().slice(0, 160),
-        });
+        };
+        if (rule.aggregate) {
+          const key = rule.id;
+          const bucket = buckets.get(key) || [];
+          bucket.push(hit);
+          buckets.set(key, bucket);
+        } else {
+          hits.push(hit);
+        }
       }
     }
+  }
+  for (const bucket of buckets.values()) {
+    const first = bucket[0];
+    hits.push({
+      ...first,
+      message:
+        bucket.length > 1 ? `${bucket.length}× ${first.message}` : first.message,
+    });
   }
   return hits;
 }
@@ -263,12 +336,10 @@ export function scanProject(root) {
   }
   const files = walk(ROOT, ROOT);
   const findings = files.flatMap((file) => scanFile(file, ROOT));
-  const critical = findings.filter((f) => f.severity === "critical");
-  const should = findings.filter((f) => f.severity === "should");
   const system = detectSystem(ROOT);
 
   if (!system.tokens) {
-    should.push({
+    findings.push({
       file: ".",
       line: 0,
       id: "no-tokens",
@@ -278,7 +349,7 @@ export function scanProject(root) {
     });
   }
   if (system.icons.length > 1) {
-    should.push({
+    findings.push({
       file: "package.json",
       line: 0,
       id: "icon-families",
@@ -288,7 +359,7 @@ export function scanProject(root) {
     });
   }
   if (system.icons.some((name) => name.includes("lucide"))) {
-    should.push({
+    findings.push({
       file: "package.json",
       line: 0,
       id: "lucide-default",
@@ -298,7 +369,7 @@ export function scanProject(root) {
     });
   }
   if (system.icons.includes("react-icons")) {
-    should.push({
+    findings.push({
       file: "package.json",
       line: 0,
       id: "icon-megapack",
@@ -308,13 +379,38 @@ export function scanProject(root) {
     });
   }
 
+  if (system.tokens) {
+    let hex = 0;
+    let tokenUse = 0;
+    for (const file of files) {
+      if (/(?:^|[/\\])(?:tokens|look)\.(?:css|scss|sass|less|ts)$/i.test(file)) continue;
+      if (!/\.(css|scss|sass|less)$/i.test(file)) continue;
+      const text = fs.readFileSync(file, "utf8");
+      hex += (text.match(/#[0-9a-fA-F]{3,8}\b/g) || []).length;
+      tokenUse += (text.match(/var\(\s*--(?:pd|color|sys|ds)-/g) || []).length;
+    }
+    if (hex >= 8 && hex > tokenUse) {
+      findings.push({
+        file: ".",
+        line: 0,
+        id: "orphaned-tokens",
+        severity: "critical",
+        message: `Tokens exist but working CSS still has ${hex} hex vs ${tokenUse} token uses — restyle the product files`,
+        sample: "tokens.css next to leftover hex is not applied",
+      });
+    }
+  }
+
+  const critical = findings.filter((f) => f.severity === "critical");
+  const should = findings.filter((f) => f.severity === "should");
+
   return {
     root: ROOT,
     files: files.length,
     critical: critical.length,
     should: should.length,
     system,
-    findings: [...findings, ...should.filter((f) => !findings.includes(f) && f.line === 0)],
+    findings,
   };
 }
 

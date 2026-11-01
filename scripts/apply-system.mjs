@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
  * Install role tokens + SYSTEM.md into a product.
+ * This is not a restyle. After it runs, leftover hex in the product CSS
+ * is still Critical — edit those files, do not add an overlay.
  * Usage:
  *   node scripts/apply-system.mjs <project-path>
  *   node scripts/apply-system.mjs . --density mixed --radius round --chrome fill --surface ios

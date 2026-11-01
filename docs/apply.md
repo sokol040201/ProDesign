@@ -12,7 +12,7 @@ Skill root: `.cursor/skills/prodesign/` in the product, else `~/.cursor/skills/p
 4. Phone and desktop are different patterns on the same tokens
 5. Scan. Critical = 0. Verify the flow, not a screenshot
 
-Hard: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), four states on every data container, **no OS chrome**, type floors (body 16 / chrome 14), no manifesto copy on working screens.
+Hard: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), four states on every data container, **no OS chrome**, type floors (body 16 / chrome 14), no manifesto copy on working screens, **tokens replace leftover hex** (no overlay CSS), no costume `01–06` pipeline.
 
 ## Pick a pattern
 
@@ -77,14 +77,14 @@ Details: [elements.md](ui/elements.md) · [controls.md](ui/controls.md) · [form
 | Pagination | Current + named prev/next | navigation |
 | Photo | Stable crop, real size. No stock empty | imagery |
 | Popover | Anchored extra. Phone → sheet | overlays |
-| Progress | Determinate if you know. Not color alone | views |
+| Progress | Determinate if you know. Not a decorative 01–06 strip | views |
 | Radio | One of a few. Circle. Default or a None | controls |
 | Rating | Stars + count. Not a lonely glyph | controls |
 | Search | Magnifier, clear, query kept, empty-result | navigation |
 | Segmented | 2–4 views of one object. Not app nav | controls |
 | Select | Styled to field tokens. OS chrome is a defect | forms |
 | Share / invite | Sheet on phone. Copy + list on desktop | flows |
-| Sidebar | Desktop sections. Icon + text. Current is obvious | navigation |
+| Sidebar | Mark + places + account. No manifesto card | navigation |
 | Skeleton | One tone, optional pulse. No rainbow | views |
 | Slider / stepper | A range. Live value. Snap to meaning | controls |
 | Status dot | Color **and** a label | views |

@@ -96,7 +96,7 @@ Rules:
 - Field + label + helper + error:
 - Search: field + results + empty-result
 - Empty / loading / empty-result / error (every data container):
-- Navigation: tab bar / sidebar / top bar:
+- Navigation: tab bar / sidebar / top bar (sidebar = mark + places + account):
 - Filters:
 - Overlay language (dialog / sheet / toast — not “popup”):
 - Destructive confirm:

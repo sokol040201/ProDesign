@@ -19,6 +19,9 @@ Work top to bottom. Fix Critical in the same session.
 - [ ] Type floors: body 16, chrome 14, caption 12 only for meta
 - [ ] No slogan H1, overline, or mission subtitle on a working screen
 - [ ] Extra sentences that restate the nav are deleted
+- [ ] Working CSS uses tokens — leftover hex / second palette / `design-refresh.css` is a defect
+- [ ] Space is on the 4/8 scale. No leftover `13px` / `20px` gutters
+- [ ] No costume `01–06` pipeline or decorative pills under a slogan
 
 ## B. Grid and space
 
@@ -56,6 +59,7 @@ Work top to bottom. Fix Critical in the same session.
 ## E. Color
 
 - [ ] Roles, not twelve independent hexes
+- [ ] Leftover palette from the previous look is gone
 - [ ] One accent, not default indigo
 - [ ] Text 4.5:1, UI chrome 3:1
 - [ ] Meaning is not color-only
@@ -88,6 +92,9 @@ Work top to bottom. Fix Critical in the same session.
 - [ ] Current place is visible
 - [ ] Top-level items are 5±2 or grouped
 - [ ] Section names are user objects
+- [ ] Sidebar is mark + places + account — no manifesto, workspace card, or env caption
+- [ ] Sidebar rows are icon + label; badge is a count
+- [ ] No glass / bounce / curved dock as product nav
 - [ ] Back / breadcrumbs exist in deep stacks
 - [ ] Tabs are not a hidden carousel; tab bar ≤ 5; icon + text
 - [ ] Hamburger only on compact; three lines; no other linear icon beside it

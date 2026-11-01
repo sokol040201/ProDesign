@@ -20,7 +20,17 @@ if (result.status !== 1) {
 
 const report = JSON.parse(result.stdout);
 const ids = new Set(report.findings.map((f) => f.id));
-for (const need of ["gradient", "emoji", "indigo-default", "native-control", "tiny-type", "manifesto-copy"]) {
+for (const need of [
+  "gradient",
+  "emoji",
+  "indigo-default",
+  "native-control",
+  "tiny-type",
+  "manifesto-copy",
+  "leftover-hex",
+  "costume-pipeline",
+  "overline-eyebrow",
+]) {
   if (!ids.has(need)) {
     console.error(`missing finding: ${need}`);
     process.exit(1);

@@ -12,6 +12,7 @@ When work touches UI, layout, styles, components, navigation, forms, copy, or to
 3. Scan: `node .cursor/skills/prodesign/scripts/scan.mjs .` (or the personal skill path)
 4. No system → studio + `apply-system.mjs` + fill `SYSTEM.md`
 5. Fix Critical in the product. Keep its controls. Four states on data containers
-6. Rescan. Critical = 0
+6. Restyle the product CSS — leftover hex, overlay files, and costume pipelines are Critical
+7. Rescan. Critical = 0
 
-Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), no empty container without a state. Phone and desktop use different patterns on the same tokens.
+Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), no empty container without a state, tokens replace leftover hex (no `design-refresh` overlay), no costume `01–06` process. Phone and desktop use different patterns on the same tokens.

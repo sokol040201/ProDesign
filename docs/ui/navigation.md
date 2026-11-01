@@ -30,11 +30,76 @@ Always visible. Weight, a marker, or a container — not color alone. The docume
 
 ## Desktop
 
-- Sidebar: icon + text, 5±2 or grouped. Collapse keeps the selection
+- Sidebar: icon + text, 5±2 or grouped. Collapse keeps the selection. Full contract: [Sidebar](#sidebar)
 - Content has one H1. Breadcrumbs above it when the stack is deep
 - Toolbar actions belong to the current object, not to global nav
 - Do not hide a sidebar behind a hamburger when the window is wide
 - Keyboard: skip link, visible focus, `⌘K` / `Ctrl+K` if you have a command palette — it does not replace nav
+
+## Sidebar
+
+A list of **places**. It is not a landing, not a status board, not a brand story.
+
+### Slots (only these)
+
+| Slot | What | Required |
+| --- | --- | --- |
+| Mark | Logo or monogram + product name, one line. Click = home | Yes |
+| Switcher | Current workspace / project, one row, opens a menu | Only if there is more than one |
+| Nav | Icon + label. Optional count badge. Current is a fill or weight | Yes |
+| Footer | Account: avatar + name. Opens a menu | If the product has an account |
+
+Width 240–260 (rail 56–72 when collapsed). Row 36–40. Icon 20. Label 14. Gap icon→label 8–12. One 1 px rule between mark / nav / footer if proximity is not enough.
+
+### Current
+
+Weight, a container, or a marker — not color alone. The item name matches the page H1.
+
+### Badge
+
+A count (`12`), or nothing. Not “NEW”, not a status essay, not a second brand.
+
+### Switcher
+
+One row: mark + name + chevron. It is a **menu**, not a card. No subtitle (“Personal studio”), no status dot unless it is live presence, no second manifesto under the name.
+
+### Footer account
+
+Avatar + name. Plan / env (`Local`) lives **inside** the account menu, not as a caption under a sermon. No shield card.
+
+### Do not put in the sidebar
+
+- A slogan or period-as-drama on the mark (`завод.`)
+- A workspace **card** with a blurb
+- An uppercase section label when there is only one group (`РАБОЧЕЕ ПРОСТРАНСТВО`)
+- A manifesto tile (“The last word is yours”, “Every item ships after approval”)
+- Environment / machine copy (“Local on your Mac”)
+- Help, marketing, or onboarding essays
+- A primary create button that duplicates the page CTA
+- Glass, glow, bounce, curved “dock”, or an animated tree as product nav
+- Icon-only items when the bar is wide enough for labels
+- More than one current highlight
+
+If you have 5–7 places, **do not group**. A group label is for 8+ items in two real jobs (e.g. Work / Settings). Names are user objects, not “Workspace”.
+
+### Collapse
+
+Rail keeps icons + current. Tooltips name the icon. The switcher becomes the mark. Account becomes the avatar. Do not hide the current place.
+
+### Phone
+
+The sidebar is a **drawer**. Same items, same order. Swipe / scrim / system back closes. It is not a second tab bar.
+
+### Hunt
+
+```
+sidebar card + paragraph
+uppercase section over a single list
+status / shield / “you’re in control”
+native <select> as the workspace switcher
+icon-only on a 240 px bar
+glass / blur / bounce sidebar
+```
 
 ## In-page tabs
 

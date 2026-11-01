@@ -67,8 +67,8 @@ Depth: [controls.md](controls.md). Text field anatomy: [forms.md](forms.md). Tit
 | Gallery | A set of media | Grid + lightbox | Grid + lightbox | A hero slider (that is Carousel); random crops |
 | Loading Indicator | Indeterminate wait ~300 ms+ | In place | In place | Emoji; gradient ring; empty “no data” while loading |
 | Map Pin | A place on a map | Tap → label | Same | 200 pins; emoji inside; a new color with no legend |
-| Progress Indicator | Determinate N of M or % | Bar + number | Same | Spinner for a known percent; color-only |
-| Side Navigation | Persistent sections | Drawer if needed | Sidebar always if room | Hamburger on a wide screen |
+| Progress Indicator | Determinate N of M or % | Bar + number | Same | Spinner for a known percent; decorative 01–06 pipeline |
+| Side Navigation | Places: mark, list, account | Drawer | 240–260, icon + text | Manifesto card; workspace blurb; icon-only on a wide bar |
 | Skeleton | Layout of what is coming | Same shape | Same shape | Rainbow shimmer; held for seconds on a fast reply |
 | Stacked List | Default collection | Grouped rows ok | One panel or a table | A column of pill-cards on desktop |
 | Status Dot | Live / on / off in a row | 8–10 px + label | Same | Color-only; infinite pulse unless live |
@@ -119,6 +119,7 @@ Depth: [imagery.md](imagery.md). Icons: [icons.md](icons.md).
 
 | Do not confuse | With | Why |
 | --- | --- | --- |
+| Sidebar | A page of cards | Places vs a landing in the rail |
 | Button | Link | Verb on data vs go somewhere |
 | Button | Chip | Chip is a filter / token, not a submit |
 | Switch | Checkbox | Instant vs save-with-form |

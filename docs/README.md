@@ -27,7 +27,7 @@ Read from [SKILL.md](../SKILL.md). **First file on a UI task:** [apply.md](apply
 
 - [components.md](ui/components.md) — which pattern, not a widget
 - [elements.md](ui/elements.md) — 49 named parts (Control / View / Overlay / Imagery)
-- [navigation.md](ui/navigation.md)
+- [navigation.md](ui/navigation.md) — sidebar slots: mark, places, account
 - [states.md](ui/states.md)
 - [behavior.md](ui/behavior.md)
 - [flows.md](ui/flows.md) — 71 user jobs (auth, pay, create, share, …)

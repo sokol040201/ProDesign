@@ -8,4 +8,4 @@ This repo is under ProDesign. Agents apply shared UI patterns to this product’
 - Install / refresh tokens: `node .cursor/skills/prodesign/scripts/apply-system.mjs .`
 - Product decisions: look for `design-system/SYSTEM.md` (or `src/design-system/SYSTEM.md`)
 
-Do not ship gradients, emoji-as-icons, or empty lists without a state.
+Do not ship gradients, emoji-as-icons, or empty lists without a state. Installing `tokens.css` is not a restyle: leftover hex, overlay CSS, and costume pipelines are Critical.

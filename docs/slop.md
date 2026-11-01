@@ -62,8 +62,30 @@ This is the most common miss. Tokens get installed, Critical scan is 0, and the 
 | Robot / mascot on every card or empty | One pack icon, or nothing |
 | Filter chips as a row of soft pills plus a slogan | Chips for filters only; title stays the place |
 | Icon-only sidebar on desktop | Icon + text |
+| Sidebar manifesto / shield card / “you’re in control” | Delete. Nav is places |
+| Workspace **card** with a subtitle in the sidebar | One-row switcher, or nothing |
+| Uppercase group label over a single list | Delete the label |
+| Environment line in the rail (`Local on your Mac`) | Account menu |
+| Glass / bounce / curved dock as product nav | Flat rail, icon + text |
 
-A design system that is only `tokens.css` imported next to Inter and a native select is not applied.
+A design system that is only `tokens.css` imported next to Inter, leftover hex, and a native select is not applied.
+
+| Tell | Fix |
+| --- | --- |
+| `tokens.css` + `style.css` still full of `#efefe8` / `#2459d8` / `#d5ed9b` | Restyle the product CSS onto tokens. Delete leftover hex |
+| `design-refresh.css` / second `:root` palette on top of the old look | Edit `style.css`. Delete the overlay |
+| Off-scale leftover space (`padding: 13px 14px`, `gap: 20px`, `32px 20px 15px`) | 4/8 scale + one gutter |
+| `01 02 03 04 05 06` circles with arrows (“production line”) | List / table / real wizard |
+| Brand essay + decorative pills (`Маленький робот. Большое любопытство.`) | Place name. Delete the essay |
+| Icon-only rail on a wide desktop | Icon + text |
+
+## Catalog costume
+
+Community component catalogs (glass sidebars, aurora heroes, liquid buttons, bounce rails) are **not** a product system. A working app may look at their **slots** (mark → list → account) and must refuse the costume.
+
+Do not paste: glass sidebar, spotlight card, shader background, bounce nav, curved menu, 3D testimonial, feature-bento, “AI prompt box” chrome, gradient wordmark.
+
+If a preview looks like a landing, it is not app chrome.
 
 ## Copy slop
 
@@ -106,4 +128,7 @@ lucide-react|<svg[^>]*>\s*<path d="
 text-xs|font-size:\s*1[0-3]px
 eyebrow|tracking-widest
 От идеи до|под контролем|на автопилоте|Unlock|seamless|journey
+#[0-9a-fA-F]{3,8}
+pipeline-node|производственная линия
+design-refresh\\.css
 ```

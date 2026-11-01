@@ -123,12 +123,13 @@ Repeats the coming layout. Neutral opacity pulse — not a rainbow shimmer (grad
 
 ## Progress Indicator
 
-Determinate: a percent, or step N of M.
+Determinate: a percent, or step N of M **the person is in**.
 
 - Determinate ≠ an indeterminate spinner
 - Copy “3 of 7” or a percent
 - Not color alone (bar + number)
 - A wizard also names the steps
+- A row of `01–06` circles with arrows on a dashboard is **costume**, not progress. Use a list, a table, or a real wizard
 
 ## Map Pin
 
@@ -140,14 +141,13 @@ Determinate: a percent, or step N of M.
 
 ## Side Navigation
 
-Persistent sections on medium+.
+Persistent **places** on medium+. Full contract: [navigation.md](navigation.md#sidebar).
 
-- Do not hide it in a hamburger on desktop when there is room
-- Current item is obvious
-- Icon + text; icon-only only in a rail with a tooltip and aria
-- 5±2 items or groups
-- Collapse keeps the selection
-- No emoji in items
+- Mark + nav + account. Nothing else
+- Icon + text. Icon-only only in a collapsed rail
+- 5±2 items, or groups only when there are two real jobs
+- Current is obvious. Badge is a count
+- No manifesto card, workspace blurb, env caption, glass, or bounce
 
 ## Top Navigation Bar
 

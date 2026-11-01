@@ -101,7 +101,7 @@ If the skill is installed globally or in the repo, **every UI change follows it*
 2. Open the studio and lock a look
 3. Install tokens if none exist
 4. Scan
-5. Fix Critical **in the product’s markup**
+5. Fix Critical **in the product’s markup and CSS** — leftover hex, overlay files, and costume pipelines count
 6. Pick the named element (`docs/ui/elements.md`) and the user job (`docs/ui/flows.md`)
 7. Rescan until Critical is 0
 8. Verify the flow, not a screenshot
