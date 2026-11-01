@@ -46,12 +46,17 @@ Readonly looks like content, not like a dead input. Disabled looks muted and is 
 
 ## Select / combobox
 
-- Native select when the list is short and closed
-- Combobox when people must filter a long list
-- The closed control shows the current value, not “Select…”
+The OS `<select>` is **not** a finished control. Leaving browser chrome (system menu, 13 px type, grey arrow) is a defect.
+
+- Same height, radius, border, type, and focus as the text field
+- `appearance: none` (or a combobox). Custom chevron from the **installed** pack, not a Unicode `▼`
+- Closed control shows the current value, not “Select…”
+- Short closed list: styled native select is allowed **only** after it matches the field tokens
+- Long list people filter: combobox
 - Menu: 8–12 visible rows, then scroll; the selected row is visible on open
 - Empty filter state inside the menu: “No matches” + a way to clear
 - Do not style a div to look like a select and forget keyboard (arrows, typeahead, Escape)
+- Same rule for `input type="date|time|color|file|range"`: the visible chrome is the design system, not the OS
 
 ## Validation
 
@@ -101,6 +106,7 @@ Do not validate only in red. Icon + text + edge.
 ## What to hunt
 
 ```
+unstyled <select> / OS date / OS file
 placeholder-only labels
 disabled submit until 12 fields are "perfect"
 <button>OK</button>

@@ -12,7 +12,7 @@ Skill root: `.cursor/skills/prodesign/` in the product, else `~/.cursor/skills/p
 4. Phone and desktop are different patterns on the same tokens
 5. Scan. Critical = 0. Verify the flow, not a screenshot
 
-Hard: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), four states on every data container.
+Hard: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), four states on every data container, **no OS chrome**, type floors (body 16 / chrome 14), no manifesto copy on working screens.
 
 ## Pick a pattern
 
@@ -82,7 +82,7 @@ Details: [elements.md](ui/elements.md) · [controls.md](ui/controls.md) · [form
 | Rating | Stars + count. Not a lonely glyph | controls |
 | Search | Magnifier, clear, query kept, empty-result | navigation |
 | Segmented | 2–4 views of one object. Not app nav | controls |
-| Select | Closed control shows the value | forms |
+| Select | Styled to field tokens. OS chrome is a defect | forms |
 | Share / invite | Sheet on phone. Copy + list on desktop | flows |
 | Sidebar | Desktop sections. Icon + text. Current is obvious | navigation |
 | Skeleton | One tone, optional pulse. No rainbow | views |
@@ -106,7 +106,7 @@ If it is a named part, do not invent a type. Open [elements.md](ui/elements.md) 
 
 | Group | Open when |
 | --- | --- |
-| Control | Accordion, Button, Checkbox, Color / Date / Time Picker, FAB, Radio, Rating, Search Bar, Segmented, Slider, Stepper, Switch, Tab, Text Field, Title |
+| Control | Accordion, Button, Checkbox, Color / Date / Time Picker, FAB, Radio, Rating, Search Bar, Select, Segmented, Slider, Stepper, Switch, Tab, Text Field, Title |
 | View | Badge, Banner, Card, Carousel, Chip, Divider, Gallery, Loading, Map Pin, Progress, Side / Top Nav, Skeleton, Stacked List, Status Dot, Tab Bar, Table, Toolbar |
 | Overlay | Action Sheet, Bottom Sheet, Coach Marks, Dialog, Drawer, Dropdown, Full-Screen, Toast, Tooltip |
 | Imagery | Avatar, Icon, Illustration, Logo, Photo |

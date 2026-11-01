@@ -6,7 +6,7 @@ Do not copy another brand. Copy the discipline: few tokens, a dense tool, air in
 
 - Space: 4 8 12 16 24 32
 - Radius: 6 8 12 — modest
-- App body ~13–14, not a marketing 16
+- Dense **space**, not tiny type. Body stays 16; rows get tighter padding
 - Almost monochrome, one accent that is theirs
 - Issue rows are short; the first screen holds a lot of meaning
 - Empty: short line, icon, one create action

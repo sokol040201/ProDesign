@@ -25,6 +25,9 @@ These are not style preferences.
 2. **No emoji in the UI.** Not in buttons, navigation, empty states, badges, titles, or as icons.
 3. **One installed icon pack.** Phosphor, Heroicons, Tabler, Iconoir, SF Symbols, Material Symbols, Fluent, Carbon, or another complete family. **Not Lucide.** Not homemade `<svg><path>`. Not emoji or Unicode stand-ins (`→`, `✓`, `✦`, `★`, `⚡`). If the pack has no glyph, use a synonym or text.
 4. **Every data container has states.** List, table, inbox, search, chart, folder: loading, empty, empty-result, error. A blank box is a defect.
+5. **No leftover OS chrome.** Select, checkbox, radio, date, time, file, and range use the product tokens: same height, radius, type, border, and focus as the text field. An unstyled native `<select>` is a defect. `appearance: none` + tokens, or a combobox built on the system. Do not ship the browser’s default control.
+6. **Type floors.** Web body **16 / 24**. Working chrome (nav, button, field, row title) **≥ 14**. Caption **12** only for meta. `text-xs`, 11 px body, or `html { font-size: 14px }` that shrinks the app is a defect. Dense is tighter space, not tiny type.
+7. **No manifesto on a working screen.** The H1 is the place name (`Materials`, `Invoices`), not a slogan. Delete the overline, the subtitle that restates the nav, the footer reassurance, and the mascot. If the UI is clear, the sentence goes.
 
 ## Job
 
@@ -37,7 +40,9 @@ When this skill is attached, **do the work in the product**. Finish only when:
 3. Scan Critical is 0
 4. Touched screens use tokens, not magic numbers
 5. Data containers have the four states
-6. Controls match [components.md](docs/ui/components.md)
+6. Controls match [elements.md](docs/ui/elements.md) — restyled, not OS-native
+7. Type meets the floors. No Inter-by-default
+8. Working screens have no slogan H1, overline, or extra explanation
 
 Do not stop at a report. A report is the last step, after the fixes.
 
@@ -138,7 +143,7 @@ Then read [slop.md](docs/slop.md) and [audit.md](docs/audit.md). The script is a
 
 Edit the product.
 
-1. Bans: gradients, emoji, fake icons
+1. Bans: gradients, emoji, fake icons, OS chrome, tiny type, manifesto copy
 2. Contrast and target size
 3. Snap space, radius, and type to tokens
 4. One primary accent per screen

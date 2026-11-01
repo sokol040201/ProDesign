@@ -40,6 +40,7 @@ Shared: looks like what it is. One primary per region. Target ≥ 44 / 48. State
 | Radio Button | One of a few | Stack | Stack | One option; two ons; > ~7 (use select) |
 | Rating Control | Set or show a score | Tap to set | Hover preview | Emoji stars; average without a count |
 | Search Bar | Find in or across | Icon or field | Field, `/` ok | Custom mark; lose the query on results |
+| Select | One value from a closed list | Styled field + sheet | Styled field + menu | Unstyled OS `<select>`; Unicode `▼` |
 | Segmented Control | 2–4 views of one object | Full width | Compact | App nav; a scrolling hidden set |
 | Slider | A range | Thumb 44 | Thumb ≥ 24 + field | Dates; an exact integer (use stepper + field) |
 | Stepper | Discrete ± | − value + | Same | 0–10 000 without a field |

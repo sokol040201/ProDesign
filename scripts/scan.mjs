@@ -138,6 +138,30 @@ export const RULES = [
     message: "Bounce / spring on working UI — use 120–200ms ease-out",
     re: /animate-bounce|ease-in-out-bounce|cubic-bezier\(\s*0\.68\s*,\s*-|spring\(|type:\s*["']spring["']/i,
   },
+  {
+    id: "native-control",
+    severity: "critical",
+    message: "OS chrome left on a control — restyle select/date/file to field tokens",
+    re: /<select[\s>]|<input[^>]*type=["'](?:date|time|month|week|color|file|range)["']/i,
+  },
+  {
+    id: "tiny-type",
+    severity: "critical",
+    message: "Type below the floor — body 16, chrome 14, caption 12 only for meta",
+    re: /text-xs\b|text-\[1[01]px\]|font-size:\s*(?:9|10|11)px\b|:root[^{]*\{[^}]*font-size:\s*1[0-3]px|html[^{]*\{[^}]*font-size:\s*1[0-3]px/,
+  },
+  {
+    id: "manifesto-copy",
+    severity: "critical",
+    message: "Landing slogan on a working screen — H1 is the place name, delete the mission line",
+    re: /От идеи до|под вашим контролем|всё под контролем|на автопилоте|в одном месте|Unlock the|seamless|your journey|next-gen|Everything in one place/i,
+  },
+  {
+    id: "overline-eyebrow",
+    severity: "should",
+    message: "Overline / eyebrow above the title — delete it",
+    re: /class(Name)?=["'][^"']*eyebrow|tracking-widest|uppercase tracking-/,
+  },
 ];
 
 function walk(dir, root, out = []) {

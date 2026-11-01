@@ -15,6 +15,10 @@ Work top to bottom. Fix Critical in the same session.
 - [ ] One stroke / style from that pack
 - [ ] Icon-only controls have an accessible name
 - [ ] Lists, tables, panels, search, charts: loading / empty / empty-result / error
+- [ ] No unstyled OS `<select>` / date / file — controls match field tokens
+- [ ] Type floors: body 16, chrome 14, caption 12 only for meta
+- [ ] No slogan H1, overline, or mission subtitle on a working screen
+- [ ] Extra sentences that restate the nav are deleted
 
 ## B. Grid and space
 
@@ -44,7 +48,7 @@ Work top to bottom. Fix Critical in the same session.
 - [ ] One or two families plus mono
 - [ ] Not a model-default face without a reason
 - [ ] A real size jump, not a 1.2 ladder
-- [ ] Body is readable (16 web / 17 iOS / 13–14 dense)
+- [ ] Body is readable (16 web / 17 iOS). Dense does not shrink type below 14 chrome / 16 body
 - [ ] No thin / ultralight in UI
 - [ ] No tracked body, no all-caps paragraphs
 - [ ] Type scales with user settings (`rem` / `sp` / Dynamic Type)

@@ -72,3 +72,5 @@ Rare support for empty or onboarding.
 - Not on every screen
 
 When in doubt, do not draw. A 32–48 icon is calmer.
+
+A 3D robot / generated mascot on every card or empty is slop. One pack icon, or the content itself.

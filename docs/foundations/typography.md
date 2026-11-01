@@ -34,11 +34,11 @@ No more than 6–8 styles in a product.
 | subtitle | 16–18 / 1.35 | 600 | 0 | section, card |
 | body | 16 / 24 | 400 | 0 | reading |
 | body-sm | 14 / 20 | 400 | 0 | dense app, secondary |
-| label | 13–14 / 16–20 | 500–600 | 0 | buttons, tabs |
+| label | 14 / 20 | 500–600 | 0 | buttons, tabs |
 | caption | 12 / 16 | 400–500 | 0 | meta, help |
 | overline | do not use | | | uppercase + tracking is a tell |
 
-Dense apps: body 13–14 / 20, title 16–18. Marketing: body 16–18 / 28, display as needed.
+Dense apps: body still 16, title 18–20, row 14. Marketing: body 16–18 / 28, display as needed. Do not “go dense” by dropping body to 12.
 
 ## Platform scales
 
@@ -100,8 +100,11 @@ Fluent web body is 14/20; Title 3 is 24/32. Carbon uses a productive fixed set a
 - Do not crush display until letters touch
 - Do not justify without hyphenation
 - Do not set paragraphs in capitals
-- Web body ≥16, iOS ≥17; 13–14 only in dense tools with a knowing audience
-- Inputs on iOS stay ≥16 px or the page will zoom
+- Web body **16 / 24**. iOS body **17**. Inputs on iOS stay ≥16 px or the page will zoom
+- Working chrome (nav item, button, field, row title) **≥ 14 / 20**
+- Caption **12 / 16** only for meta (time, version, legal). Not for the page subtitle
+- Dense means less padding, not 11 px type. `text-xs` on a row title is a defect
+- Do not set `html` / `:root` to 14 px so that `rem` shrinks the whole app. Keep rem = 16 and tighten space tokens
 
 ## Hierarchy
 
@@ -156,8 +159,11 @@ Icon weight equals text weight. Optical size ≈ type size. A 24 icon next to a 
 - A 1.2 ladder of sizes with no display jump
 
 ```
+text-xs text-[11px] text-[12px] on titles / body
+html { font-size: 14px }
 text-[13px] text-[15px] text-[17px] text-[19px]
 font-light font-thin
+Inter, Geist, Space Grotesk on :root
 tracking-wide on paragraphs
 uppercase tracking-widest on every section
 font-serif on one word of a sans headline

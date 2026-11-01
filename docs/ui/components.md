@@ -9,7 +9,7 @@ Catalog of **patterns**. For a one-line pick, use [apply.md](../apply.md) or the
 | Navigation | [navigation.md](navigation.md) | Tab bar, sidebar, top bar, search, breadcrumbs, back |
 | States | [states.md](states.md) | Control, container, nav, overlay |
 | Behavior | [behavior.md](behavior.md) | Feedback, undo, selection, filters, errors |
-| Controls | [controls.md](controls.md) | Accordion, Button, Checkbox, Color / Date / Time Picker, FAB, Radio, Rating, Search, Segmented, Slider, Stepper, Switch, Tab |
+| Controls | [controls.md](controls.md) | Accordion, Button, Checkbox, Color / Date / Time Picker, FAB, Radio, Rating, Search, Select, Segmented, Slider, Stepper, Switch, Tab, Text Field |
 | Forms | [forms.md](forms.md) | Text field, textarea, select, labels, validation, file upload |
 | Views | [views.md](views.md) | Badge, Banner, Card, Carousel, Chip, Divider, Gallery, Loading, Map Pin, Progress, Side / Top Nav, Skeleton, Stacked List, Status Dot, Tab Bar, Table, Toolbar |
 | Overlays | [overlays.md](overlays.md) | Action Sheet, Bottom Sheet, Coach Marks, Dialog, Drawer, Dropdown, Full-Screen, Popover, Toast, Tooltip |

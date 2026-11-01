@@ -176,6 +176,12 @@ A tool, not page decoration.
 - Time: 24h where that is the locale; 5–15 minute steps if precision is unused
 - Do not ship a `__/__/____` mask as the only path
 
+## Select
+
+A styled field that opens a list. The browser’s default `<select>` is unfinished.
+
+Same height / radius / type / focus as the text field. `appearance: none` + a pack chevron. Full rules: [forms.md](forms.md#select--combobox).
+
 ## Text Field
 
 One typed value. Full anatomy: [forms.md](forms.md).

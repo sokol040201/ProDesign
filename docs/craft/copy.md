@@ -10,6 +10,8 @@ Words are part of the layout. Sloppy type-setting is a visual defect.
 - Empty: what will live here and how to start
 - One product, one word for one action
 - No “Unlock”, “seamless”, “journey”, “next-gen”
+- No “От идеи до…”, “всё под контролем”, “на автопилоте”, “в одном месте”
+- A working screen is not a landing. H1 = the place. Delete the mission subtitle
 
 ## Punctuation
 
@@ -30,6 +32,20 @@ Words are part of the layout. Sloppy type-setting is a visual defect.
 - Helper text before the error; the error replaces it
 - Optional vs required: one system, not both
 - Units live in the label or a suffix, not only in the placeholder
+
+## Strip first
+
+Most generated apps add a paragraph the person already knows.
+
+Delete:
+
+- The overline above the title
+- The sentence under the H1 that restates the nav (`Scripts, reels and posts. Everything under your control.`)
+- The footer caption that restates a rule already in the UI
+- “How this works” on a screen that already has a primary action
+- Empty-state essays. Title + one line + one verb
+
+Keep: the object name, the verb, the state, the error.
 
 ## Length
 

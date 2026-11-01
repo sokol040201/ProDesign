@@ -7,8 +7,8 @@ Density is how much meaning sits in one screen. It is a product decision.
 | Mode | Product | Signs |
 | --- | --- | --- |
 | Airy | marketing, onboarding, empty, editorial, consumer first-run | large type, 48–64 section gaps, few objects, one accent |
-| Working | most SaaS, settings, profiles | 16–24 inner, 24–32 between groups, body 14–16 |
-| Dense | tables, trackers, finance, logs, IDE, console | rows 32–40, padding 8–12, body 13–14, 8–14 objects in the first screen |
+| Working | most SaaS, settings, profiles | 16–24 inner, 24–32 between groups, body 16, chrome 14 |
+| Dense | tables, trackers, finance, logs, IDE, console | rows 36–40, padding 8–12, body 16, chrome 14, 8–14 objects in the first screen |
 | Mixed | a good product | air between modules, density inside a module |
 
 Phone page gutter stays **16** in every density. Airy does not widen the screen margin. See [layout.md](layout.md).
@@ -77,8 +77,8 @@ Linear, Stripe Dashboard, Figma, Notion: air in marketing, a tool inside. Copy t
 | Card padding | 24 | 16 | 12 |
 | List row | 56–64 | 48 | 36–40 |
 | Control height | 48 | 40–44 | 32 (hit 44) |
-| Title | 28–32 | 22–24 | 16–18 |
-| Body | 16–18 | 16 | 13–14 |
+| Title | 28–32 | 22–24 | 18–20 |
+| Body | 16–18 | 16 | 16 |
 
 ## How to audit
 

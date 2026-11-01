@@ -120,10 +120,20 @@ Jobs this product actually has. Use the skill’s `docs/ui/flows.md`. Same job �
 - Title, list, and cards share the **same** page gutter. Do not double-pad a list inside an already padded column
 - Related things are closer than unrelated ones
 
+## Controls (must be restyled)
+
+OS chrome is a defect. Select, checkbox, radio, date, time, file, range use the same height, radius, type, border, and focus as the text field (`appearance: none` + pack icon).
+
+## Type floors
+
+- Body 16 / 24 (web). Chrome ≥ 14. Caption 12 only for meta
+- Do not shrink `html` / `:root` below 16 px to make a “dense” app
+
 ## Voice
 
 - Primary action verb:
 - Words we never use:
+- Working screen H1 = the place name, not a slogan. No overline. No mission subtitle
 - Errors say what happened and what to do
 
 ## States every container must have

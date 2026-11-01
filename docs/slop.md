@@ -45,14 +45,37 @@ In this skill, gradients and emoji are always illegal.
 | A 72px ten-word headline | Shorter and smaller |
 | A generated SVG mascot | Remove |
 
+## App screen dressed as a landing
+
+This is the most common miss. Tokens get installed, Critical scan is 0, and the screen still reads as a generated template.
+
+| Tell | Fix |
+| --- | --- |
+| Overline above the H1 (`КОНТЕНТ-ЗАВОД`, `NEW VISUAL SYSTEM`) | Delete. The nav already names the product |
+| Slogan H1 (`От идеи до публикации.`, `Everything in one place.`) | Place name: `Materials`, `Project` |
+| Manifesto under the title (`Всё под вашим контролем`, two sentences of mission) | Delete. The list is the explanation |
+| Footer reassurance (`Every item ships only after approval`) | Delete, or one filter/status, not a caption |
+| Native `<select>` / OS date / OS file | Restyle to the field tokens |
+| `html { font-size: 14px }` + `text-xs` everywhere | Body 16, chrome 14, caption 12 |
+| Inter / Geist still on `:root` | The face named in `SYSTEM.md` |
+| Default blue pill button (`#3b82f6`, `#2459d8`) with no brand | The one accent in `SYSTEM.md`, or near-black |
+| Robot / mascot on every card or empty | One pack icon, or nothing |
+| Filter chips as a row of soft pills plus a slogan | Chips for filters only; title stays the place |
+| Icon-only sidebar on desktop | Icon + text |
+
+A design system that is only `tokens.css` imported next to Inter and a native select is not applied.
+
 ## Copy slop
 
 - “Unlock the power”, “seamless”, “next-gen”, “your journey”
+- “От идеи до…”, “всё под контролем”, “на автопилоте”, “в одном месте”
+- A subtitle that repeats the page name or the nav
 - Testimonials with a gradient initial avatar
 - A four-column footer on a three-page site
 - All-caps paragraphs
+- Period-as-drama on a three-word headline (`Publication.`)
 
-Write what the screen does and what to press.
+Write the object and the verb. If a sentence does not change what the person does, delete it.
 
 ## Why it appears
 
@@ -79,4 +102,8 @@ backdrop-blur|drop-shadow-\[[^\]]+rgba
 rounded-\[(?:3[2-9]|[4-9]\d)px\]
 ✨|🚀|⚡|✅|🔒|⭐
 lucide-react|<svg[^>]*>\s*<path d="
+<select
+text-xs|font-size:\s*1[0-3]px
+eyebrow|tracking-widest
+От идеи до|под контролем|на автопилоте|Unlock|seamless|journey
 ```
