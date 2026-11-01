@@ -1,0 +1,17 @@
+---
+description: ProDesign — scan the UI, fix defects, keep one design system.
+alwaysApply: true
+---
+
+# ProDesign
+
+When work touches UI, layout, styles, components, navigation, forms, copy, or tokens:
+
+1. Read the skill: `.cursor/skills/prodesign/SKILL.md` if present, else `~/.cursor/skills/prodesign/SKILL.md`
+2. Read `docs/apply.md` in that skill — pick the pattern (button vs link, sheet vs dialog, list vs table). Named parts → `docs/ui/elements.md`. User jobs (sign in, pay, create, share) → `docs/ui/flows.md`
+3. Scan: `node .cursor/skills/prodesign/scripts/scan.mjs .` (or the personal skill path)
+4. No system → studio + `apply-system.mjs` + fill `SYSTEM.md`
+5. Fix Critical in the product. Keep its controls. Four states on data containers
+6. Rescan. Critical = 0
+
+Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not homemade paths), no empty container without a state. Phone and desktop use different patterns on the same tokens.

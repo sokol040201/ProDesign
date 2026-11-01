@@ -1,0 +1,14 @@
+{
+  "id": "product",
+  "name": "Product",
+  "use": "SaaS default",
+  "surface": "web",
+  "viewport": "desktop",
+  "density": "mixed",
+  "radius": "standard",
+  "chrome": "outline",
+  "controls": "rect",
+  "icons": "line",
+  "iconPack": "phosphor",
+  "motion": "standard"
+}

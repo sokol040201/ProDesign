@@ -1,0 +1,14 @@
+{
+  "id": "material",
+  "name": "Material",
+  "use": "Android app",
+  "surface": "android",
+  "viewport": "phone",
+  "density": "mixed",
+  "radius": "soft",
+  "chrome": "fill",
+  "controls": "rect",
+  "icons": "solid",
+  "iconPack": "material-symbols",
+  "motion": "standard"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "console",
+  "name": "Console",
+  "use": "Dense web tools",
+  "surface": "web",
+  "viewport": "desktop",
+  "density": "dense",
+  "radius": "sharp",
+  "chrome": "outline",
+  "controls": "rect",
+  "icons": "line",
+  "iconPack": "tabler",
+  "motion": "subtle"
+}

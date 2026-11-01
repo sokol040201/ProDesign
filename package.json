@@ -1,0 +1,32 @@
+{
+  "name": "prodesign",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Installable Cursor skill that scans a product UI, fixes defects, and installs a design system.",
+  "type": "module",
+  "bin": {
+    "prodesign": "./scripts/prodesign.mjs"
+  },
+  "scripts": {
+    "scan": "node scripts/scan.mjs",
+    "apply": "node scripts/apply-system.mjs",
+    "studio": "node scripts/studio.mjs",
+    "test": "node tests/scan.test.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "SKILL.md",
+    "AGENTS.md",
+    "README.md",
+    "LICENSE",
+    "docs",
+    "scripts",
+    "kit",
+    "rules",
+    "studio",
+    "install.sh"
+  ],
+  "license": "MIT"
+}

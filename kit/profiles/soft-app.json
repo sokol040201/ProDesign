@@ -1,0 +1,14 @@
+{
+  "id": "soft-app",
+  "name": "Soft app",
+  "use": "Phone, no hairlines",
+  "surface": "ios",
+  "viewport": "phone",
+  "density": "mixed",
+  "radius": "round",
+  "chrome": "fill",
+  "controls": "pill",
+  "icons": "line",
+  "iconPack": "sf-symbols",
+  "motion": "standard"
+}

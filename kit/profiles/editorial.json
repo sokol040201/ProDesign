@@ -1,0 +1,14 @@
+{
+  "id": "editorial",
+  "name": "Editorial",
+  "use": "Marketing and first-run",
+  "surface": "web",
+  "viewport": "desktop",
+  "density": "airy",
+  "radius": "soft",
+  "chrome": "fill",
+  "controls": "pill",
+  "icons": "line",
+  "iconPack": "phosphor",
+  "motion": "standard"
+}

@@ -1,0 +1,88 @@
+/* ProDesign tokens. Import once. Do not add a second palette beside this. */
+
+:root {
+  --pd-space-0: 0;
+  --pd-space-25: 2px;
+  --pd-space-50: 4px;
+  --pd-space-100: 8px;
+  --pd-space-150: 12px;
+  --pd-space-200: 16px;
+  --pd-space-300: 24px;
+  --pd-space-400: 32px;
+  --pd-space-500: 40px;
+  --pd-space-600: 48px;
+  --pd-space-800: 64px;
+
+  --pd-radius-sm: 4px;
+  --pd-radius-md: 8px;
+  --pd-radius-lg: 12px;
+  --pd-radius-pill: 999px;
+  --pd-control-radius: var(--pd-radius-md);
+
+  --pd-border-width: 1px;
+  --pd-card-border: 1px;
+  --pd-divider: 1px;
+  --pd-field-bg: var(--pd-color-surface);
+
+  --pd-color-canvas: #f6f6f4;
+  --pd-color-surface: #ffffff;
+  --pd-color-surface-raised: #ffffff;
+  --pd-color-text: #121212;
+  --pd-color-text-muted: #5c5c5c;
+  --pd-color-border: #d9d9d4;
+  --pd-color-accent: #121212;
+  --pd-color-accent-on: #ffffff;
+  --pd-color-danger: #b42318;
+  --pd-color-danger-on: #ffffff;
+  --pd-color-warning: #875200;
+  --pd-color-success: #176d3a;
+  --pd-color-info: #185fa5;
+  --pd-color-focus: #121212;
+
+  --pd-font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pd-font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", monospace;
+  --pd-font-display: var(--pd-font-sans);
+
+  --pd-text-display: 600 32px/1.15 var(--pd-font-display);
+  --pd-text-title: 600 22px/1.25 var(--pd-font-sans);
+  --pd-text-body: 400 16px/24px var(--pd-font-sans);
+  --pd-text-label: 500 14px/20px var(--pd-font-sans);
+  --pd-text-caption: 400 12px/16px var(--pd-font-sans);
+
+  --pd-shadow: none;
+  --pd-gutter: 16px;
+  --pd-motion: 180ms;
+  --pd-ease: cubic-bezier(0.2, 0, 0, 1);
+  --pd-motion-shift: 8px;
+  --pd-target: 44px;
+  --pd-content-app: 1120px;
+  --pd-content-text: 720px;
+  --pd-z-base: 0;
+  --pd-z-raised: 10;
+  --pd-z-overlay: 40;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pd-color-canvas: #121212;
+    --pd-color-surface: #1c1c1c;
+    --pd-color-surface-raised: #262626;
+    --pd-color-text: #f4f4f1;
+    --pd-color-text-muted: #b3b3ad;
+    --pd-color-border: #3a3a36;
+    --pd-color-accent: #f4f4f1;
+    --pd-color-accent-on: #121212;
+    --pd-color-danger: #ff7a6e;
+    --pd-color-danger-on: #121212;
+    --pd-color-warning: #f5b544;
+    --pd-color-success: #5dcaa0;
+    --pd-color-info: #7eb6ff;
+    --pd-color-focus: #f4f4f1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --pd-motion: 0ms;
+  }
+}

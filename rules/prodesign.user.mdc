@@ -1,0 +1,17 @@
+---
+description: ProDesign — follow the UI skill on every layout, screen, and control.
+alwaysApply: true
+---
+
+# ProDesign (user)
+
+You have ProDesign installed globally. When work touches UI, layout, styling, components, navigation, forms, or copy:
+
+1. Read `~/.cursor/skills/prodesign/SKILL.md`
+2. Then `~/.cursor/skills/prodesign/docs/apply.md` — pick the pattern, do not invent one. Named parts → `docs/ui/elements.md`. User jobs → `docs/ui/flows.md`
+3. If the product has `.cursor/skills/prodesign/`, use that copy instead
+4. If `SYSTEM.md` exists, obey it. If not, studio + `apply-system.mjs`, then fill it
+5. Phone ≠ desktop patterns. Same tokens
+6. Scan when the skill is in the repo. Critical = 0
+
+Hard bans: no gradients, no emoji, one installed icon pack (not Lucide, not handmade paths), four states on every data container.

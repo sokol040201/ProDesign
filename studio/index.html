@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ProDesign — Look editor</title>
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <style>
+    :root {
+      --ui-bg: #f3f3f0;
+      --ui-fg: #121212;
+      --ui-muted: #5c5c5c;
+      --ui-line: #d4d4ce;
+      --ui-surface: #fff;
+      --canvas: #f6f6f4;
+      --surface: #ffffff;
+      --fg: #121212;
+      --muted: #5c5c5c;
+      --line: #d9d9d4;
+      --accent: #121212;
+      --accent-on: #fff;
+      --field: #ffffff;
+      --r-sm: 4px;
+      --r-md: 8px;
+      --r-lg: 12px;
+      --r-ctrl: 8px;
+      --row: 48px;
+      --pad: 16px;
+      --section: 24px;
+      --control: 44px;
+      --gutter: 16px;
+      --motion: 180ms;
+      --ease: cubic-bezier(0.2, 0, 0, 1);
+      --shift: 8px;
+      --title: 600 22px/1.25 ui-sans-serif, system-ui, sans-serif;
+      --body: 400 16px/24px ui-sans-serif, system-ui, sans-serif;
+      --bw: 1px;
+      --card-bw: 1px;
+      --div: 1px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      display: grid;
+      grid-template-rows: 52px 1fr;
+      grid-template-columns: 300px 1fr;
+      background: var(--ui-bg);
+      color: var(--ui-fg);
+      font: 13px/18px ui-sans-serif, system-ui, sans-serif;
+    }
+    .top {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+      min-width: 0;
+    }
+    .top strong { font: 600 14px/20px ui-sans-serif, system-ui, sans-serif; white-space: nowrap; }
+    .top .note { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ghost {
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .ghost[aria-pressed="true"] { border-color: var(--ui-fg); }
+    .apply.compact { width: auto; min-height: 32px; padding: 0 12px; }
+    aside {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      min-width: 0;
+      border-right: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+    }
+    .aside-body { flex: 1; overflow: auto; padding: 16px 16px 12px; }
+    .aside-foot {
+      flex: none;
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+    }
+    h1 { font: 600 16px/22px ui-sans-serif, system-ui, sans-serif; margin: 0 0 6px; }
+    .lead { color: var(--ui-muted); margin: 0 0 12px; }
+    .summary {
+      margin: 0 0 16px;
+      padding: 8px 10px;
+      background: var(--ui-bg);
+      border-radius: 8px;
+      color: var(--ui-muted);
+      font: 12px/16px ui-monospace, monospace;
+    }
+    h2 {
+      font: 600 11px/14px ui-sans-serif, system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ui-muted);
+      margin: 18px 0 8px;
+    }
+    .opts { display: flex; flex-direction: column; gap: 6px; }
+    button.opt {
+      text-align: left;
+      border: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+      color: var(--ui-fg);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font: inherit;
+    }
+    button.opt[aria-pressed="true"] { border-color: var(--ui-fg); }
+    button.opt small { display: block; color: var(--ui-muted); font-size: 11px; margin-top: 2px; }
+    .row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .row button.opt { flex: 1; min-width: 0; text-align: center; padding: 8px 6px; }
+    .row.tight button.opt { flex: 1 1 calc(33% - 6px); }
+    .apply {
+      width: 100%;
+      min-height: 40px;
+      border: 0;
+      background: var(--ui-fg);
+      color: #fff;
+      border-radius: 8px;
+      font: 500 13px/18px ui-sans-serif, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    code {
+      display: block;
+      margin-top: 8px;
+      padding: 10px;
+      background: var(--ui-bg);
+      border-radius: 8px;
+      font: 11px/16px ui-monospace, monospace;
+      white-space: pre-wrap;
+      color: var(--ui-muted);
+    }
+    main { padding: 20px 28px 40px; overflow: auto; min-width: 0; }
+    .preview-tabs { display: flex; gap: 6px; flex: none; }
+    .preview-tabs button {
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--ui-line);
+      background: var(--ui-surface);
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+    .preview-tabs button[aria-pressed="true"] { border-color: var(--ui-fg); }
+    .note { color: var(--ui-muted); margin: 0; }
+    .previews { display: block; }
+    .frame { display: none; }
+    .frame.on { display: block; }
+    .frame-label {
+      font: 600 11px/14px ui-sans-serif, system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ui-muted);
+      margin: 0 0 10px;
+    }
+    .phone-shell {
+      width: 100%;
+      max-width: 390px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      padding: 10px;
+    }
+    .phone {
+      --gutter: 16px;
+      background: var(--canvas);
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      color: var(--fg);
+      position: relative;
+    }
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px var(--gutter) 6px;
+      font: 600 12px/14px ui-sans-serif, system-ui, sans-serif;
+    }
+    .status i { display: flex; gap: 4px; align-items: center; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--fg); }
+    .bar-cap { width: 18px; height: 8px; border: 1px solid var(--fg); border-radius: 2px; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px var(--gutter) 10px;
+      min-height: 44px;
+    }
+    .nav.large { flex-direction: column; align-items: flex-start; gap: 4px; padding: 4px var(--gutter) 12px; }
+    .nav h3 { margin: 0; font: var(--title); color: var(--fg); }
+    .nav span { color: var(--muted); font-size: 13px; }
+    .android-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 var(--gutter);
+      font: 500 18px/24px ui-sans-serif, system-ui, sans-serif;
+    }
+    .content {
+      flex: 1;
+      padding: 0 var(--gutter) 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .tabbar {
+      display: flex;
+      border-top: var(--div) solid var(--line);
+      min-height: 56px;
+      padding-bottom: 8px;
+    }
+    .tab {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+    .tab.on { color: var(--fg); }
+    .desktop-shell {
+      --gutter: 24px;
+      max-width: 760px;
+      background: var(--canvas);
+      border-radius: 12px;
+      padding: 20px var(--gutter) 28px;
+      color: var(--fg);
+      position: relative;
+      overflow: hidden;
+    }
+    .desk-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 40px;
+      margin-bottom: 16px;
+    }
+    .desk-toolbar h3 {
+      margin: 0;
+      font: 600 16px/22px ui-sans-serif, system-ui, sans-serif;
+    }
+    .desk-tools { display: flex; align-items: center; gap: 8px; }
+    .desk-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 720px;
+    }
+    .app {
+      background: var(--surface);
+      border: var(--card-bw) solid var(--line);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: var(--control);
+      border-bottom: var(--div) solid var(--line);
+      font: 500 14px/20px ui-sans-serif, system-ui, sans-serif;
+    }
+    .list { display: flex; flex-direction: column; }
+    .item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: var(--row);
+      padding: 10px 16px;
+      border-bottom: var(--div) solid var(--line);
+    }
+    .item:last-child { border-bottom: 0; }
+    .item b { font-weight: 600; }
+    .item span { color: var(--muted); font-size: 13px; }
+    .ico { width: 20px; height: 20px; flex: none; color: var(--fg); display: grid; place-items: center; }
+    .ico svg, .ico iconify-icon { display: block; width: 20px; height: 20px; }
+    .pack-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: var(--ui-bg);
+      border-radius: 8px;
+      color: var(--ui-fg);
+    }
+    .pack-preview iconify-icon, .pack-preview svg { width: 22px; height: 22px; }
+    .pack-preview span { color: var(--ui-muted); font: 11px/14px ui-monospace, monospace; }
+    .form { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    label { display: flex; flex-direction: column; gap: 4px; font: 500 13px/16px ui-sans-serif, system-ui, sans-serif; }
+    input {
+      height: var(--control);
+      border: var(--bw) solid var(--line);
+      border-radius: var(--r-sm);
+      padding: 0 12px;
+      font: var(--body);
+      background: var(--field);
+      color: var(--fg);
+    }
+    .actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      min-height: var(--control);
+      padding: 0 16px;
+      border-radius: var(--r-ctrl);
+      border: var(--bw) solid transparent;
+      background: var(--accent);
+      color: var(--accent-on);
+      font: 500 14px/20px ui-sans-serif, system-ui, sans-serif;
+      cursor: pointer;
+      transition: background var(--motion) var(--ease), transform 80ms var(--ease);
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-sec {
+      background: var(--surface);
+      color: var(--fg);
+      border-color: var(--line);
+    }
+    [data-chrome="fill"] .btn-sec,
+    [data-chrome="mixed"] .btn-sec {
+      background: var(--canvas);
+      border-color: transparent;
+    }
+    .more {
+      margin-left: auto;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      min-width: 36px;
+      min-height: 36px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      font: 600 16px/16px ui-sans-serif, system-ui, sans-serif;
+    }
+    .empty {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .empty h3 { margin: 0; font: var(--title); }
+    .empty p { margin: 0; font: var(--body); color: var(--muted); max-width: 28em; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: var(--bw) solid var(--line);
+      background: var(--surface);
+      font-size: 12px;
+    }
+    .phone[data-chrome="fill"] .list { gap: 8px; padding: 0; }
+    .phone[data-chrome="fill"] .item {
+      background: var(--surface);
+      border-radius: var(--r-md);
+      border-bottom: 0;
+    }
+    .phone[data-chrome="fill"] .app .list .item { background: var(--canvas); }
+    .desktop-shell .item { border-radius: 0; }
+    .desktop-shell[data-chrome="fill"] .list { gap: 0; padding: 0; }
+    .desktop-shell[data-chrome="fill"] .item {
+      background: transparent;
+      border-bottom: 0;
+    }
+    .desktop-shell[data-chrome="fill"] .item:hover,
+    .desktop-shell .item.on { background: var(--canvas); }
+    .desktop-shell[data-chrome="fill"] .app { border: 0; }
+    [data-theme="dark"] {
+      --canvas: #121212;
+      --surface: #1c1c1c;
+      --fg: #f4f4f1;
+      --muted: #b3b3ad;
+      --line: #3a3a36;
+      --accent: #f4f4f1;
+      --accent-on: #121212;
+      --field: #1c1c1c;
+    }
+    [data-theme="dark"][data-chrome="fill"] { --field: #121212; }
+    .phone[data-theme="dark"][data-chrome="fill"] .app .list .item { background: #121212; }
+    .phone-shell.tablet { max-width: 560px; }
+    .phone-shell.tablet .phone { --gutter: 24px; }
+
+    .layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .layer.open { pointer-events: auto; }
+    .scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.32);
+      opacity: 0;
+      transition: opacity var(--motion) var(--ease);
+    }
+    .layer.open .scrim { opacity: 1; }
+    .popover, .sheet, .dialog, .toast { visibility: hidden; pointer-events: none; }
+    .popover {
+      position: absolute;
+      top: 108px;
+      right: var(--gutter);
+      width: 220px;
+      background: var(--surface);
+      color: var(--fg);
+      border: 1px solid var(--line);
+      border-radius: var(--r-md);
+      padding: 6px;
+      opacity: 0;
+      transform: translateY(var(--shift));
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    .layer.popover-open .popover {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 1;
+      transform: none;
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    .menu-row {
+      display: flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 0 10px;
+      border-radius: var(--r-sm);
+      font-size: 14px;
+    }
+    .menu-row.danger { color: #b42318; }
+    .sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--surface);
+      color: var(--fg);
+      border-top: 1px solid var(--line);
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      padding: 8px var(--gutter) 20px;
+      transform: translateY(100%);
+      transition: transform var(--motion) var(--ease);
+    }
+    .layer.sheet-open .sheet {
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+      transition: transform var(--motion) var(--ease);
+    }
+    .grabber {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--line);
+      margin: 6px auto 14px;
+    }
+    .sheet h4, .dialog h4 { margin: 0 0 6px; font: 600 16px/22px ui-sans-serif, system-ui, sans-serif; }
+    .sheet p, .dialog p, .toast { margin: 0 0 14px; color: var(--muted); font: 14px/20px ui-sans-serif, system-ui, sans-serif; }
+    .dialog {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      width: min(360px, calc(100% - 32px));
+      background: var(--surface);
+      color: var(--fg);
+      border: 1px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 16px;
+      opacity: 0;
+      transform: translate(-50%, calc(-50% + var(--shift)));
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    .layer.dialog-open .dialog {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 1;
+      transform: translate(-50%, -50%);
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    .toast {
+      position: absolute;
+      left: var(--gutter);
+      right: var(--gutter);
+      bottom: 72px;
+      background: var(--fg);
+      color: var(--accent-on);
+      border-radius: var(--r-sm);
+      padding: 12px 14px;
+      margin: 0;
+      opacity: 0;
+      transform: translateY(var(--shift));
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    .layer.toast-open .toast {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 1;
+      transform: none;
+      transition: opacity var(--motion) var(--ease), transform var(--motion) var(--ease);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      :root { --motion: 0ms; --shift: 0px; }
+    }
+    @media (max-width: 860px) {
+      body { grid-template-columns: 1fr; }
+      .top .note { display: none; }
+      aside {
+        position: fixed;
+        top: 52px;
+        left: 0;
+        bottom: 0;
+        width: min(320px, 100%);
+        z-index: 40;
+        border-right: 1px solid var(--ui-line);
+        box-shadow: 8px 0 24px rgba(18, 18, 18, 0.08);
+        transform: translateX(-105%);
+      }
+      aside.open { transform: none; }
+      .look-scrim {
+        display: none;
+        position: fixed;
+        inset: 52px 0 0 0;
+        background: rgba(18, 18, 18, 0.24);
+        z-index: 35;
+      }
+      .look-scrim.on { display: block; }
+    }
+    .audit {
+      max-width: 760px;
+      background: var(--ui-surface);
+      border: 1px solid var(--ui-line);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .audit-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+    .audit-head label { flex: 1; min-width: 220px; }
+    .audit-head input {
+      width: 100%;
+      height: 40px;
+      border: 1px solid var(--ui-line);
+      border-radius: 8px;
+      padding: 0 12px;
+      font: 13px/18px ui-monospace, monospace;
+      background: var(--ui-bg);
+      color: var(--ui-fg);
+    }
+    .audit-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .audit .apply { width: auto; padding: 0 16px; }
+    .audit-meta { color: var(--ui-muted); margin: 0 0 12px; }
+    .audit-list { display: flex; flex-direction: column; gap: 8px; }
+    .finding {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--ui-bg);
+    }
+    .finding b { display: block; font: 600 13px/18px ui-sans-serif, system-ui, sans-serif; }
+    .finding small { color: var(--ui-muted); font: 12px/16px ui-monospace, monospace; }
+    .finding.critical { box-shadow: inset 3px 0 0 #b42318; }
+    .ok-banner { padding: 16px; background: var(--ui-bg); border-radius: 8px; }
+    @media (min-width: 861px) {
+      .look-toggle { display: none; }
+      .look-scrim { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <strong>Look editor</strong>
+    <div class="preview-tabs" id="preview-tabs">
+      <button type="button" data-frame="phone">Phone</button>
+      <button type="button" data-frame="desktop">Desktop</button>
+      <button type="button" data-frame="audit">Audit</button>
+    </div>
+    <p class="note" id="frame-hint">Stacked list, form, empty. Dialog on desktop, sheet on phone.</p>
+    <button class="ghost look-toggle" type="button" id="toggle-look" aria-pressed="false">Look</button>
+    <button class="apply compact" type="button" id="copy-top">Copy apply</button>
+  </header>
+  <div class="look-scrim" id="look-scrim" hidden></div>
+  <aside id="look">
+    <div class="aside-body">
+      <h1>Look</h1>
+      <p class="lead">Same tokens. Phone and desktop stay different patterns. One installed icon pack — not Lucide.</p>
+      <p class="summary" id="summary"></p>
+
+      <h2>Preset</h2>
+      <div class="opts" id="presets"></div>
+
+      <h2>Surface</h2>
+      <div class="row" id="surface"></div>
+
+      <h2>Primary viewport</h2>
+      <div class="row" id="viewport"></div>
+
+      <h2>Density</h2>
+      <div class="row" id="density"></div>
+
+      <h2>Rounding</h2>
+      <div class="row tight" id="radius"></div>
+
+      <h2>Chrome</h2>
+      <div class="row" id="chrome"></div>
+
+      <h2>Controls</h2>
+      <div class="row" id="controls"></div>
+
+      <h2>Icon style</h2>
+      <div class="row" id="icons"></div>
+
+      <h2>Icon pack</h2>
+      <div class="row tight" id="iconPack"></div>
+      <div class="pack-preview" id="pack-preview"></div>
+
+      <h2>Motion</h2>
+      <div class="row" id="motion"></div>
+
+      <h2>Preview theme</h2>
+      <div class="row" id="theme"></div>
+    </div>
+    <div class="aside-foot">
+      <button class="apply" type="button" id="copy">Copy apply command</button>
+      <code id="cmd"></code>
+    </div>
+  </aside>
+  <main>
+    <div class="previews">
+      <section class="frame" data-frame="phone">
+        <p class="frame-label" id="phone-label">Phone</p>
+        <div class="phone-shell">
+          <div class="phone" id="phone" data-chrome="outline" data-theme="light"></div>
+        </div>
+      </section>
+      <section class="frame" data-frame="desktop">
+        <p class="frame-label">Desktop</p>
+        <div class="desktop-shell" id="desktop" data-chrome="outline" data-theme="light"></div>
+      </section>
+      <section class="frame" data-frame="audit">
+        <p class="frame-label">Audit</p>
+        <div class="audit">
+          <div class="audit-head">
+            <label>Project
+              <input id="project-path" placeholder="/path/to/product" spellcheck="false" />
+            </label>
+            <div class="audit-actions">
+              <button class="apply compact" type="button" id="scan-btn">Scan</button>
+              <button class="apply compact" type="button" id="fix-btn">Fix all</button>
+            </div>
+          </div>
+          <p class="audit-meta" id="audit-meta">Scan a product. Findings are written to design-system/AUDIT.md. Fix all applies the look and cleans mechanical slop.</p>
+          <div class="audit-list" id="audit-list"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script>
+    const PRESETS = {
+      console: { label: "Console", hint: "Dense web tools", surface: "web", viewport: "desktop", density: "dense", radius: "sharp", chrome: "outline", controls: "rect", icons: "line", iconPack: "tabler", motion: "subtle" },
+      product: { label: "Product", hint: "SaaS default", surface: "web", viewport: "desktop", density: "mixed", radius: "standard", chrome: "outline", controls: "rect", icons: "line", iconPack: "phosphor", motion: "standard" },
+      "soft-app": { label: "Soft app", hint: "Phone, no hairlines", surface: "ios", viewport: "phone", density: "mixed", radius: "round", chrome: "fill", controls: "pill", icons: "line", iconPack: "sf-symbols", motion: "standard" },
+      material: { label: "Material", hint: "Android app", surface: "android", viewport: "phone", density: "mixed", radius: "soft", chrome: "fill", controls: "rect", icons: "solid", iconPack: "material-symbols", motion: "standard" },
+      editorial: { label: "Editorial", hint: "Marketing and first-run", surface: "web", viewport: "desktop", density: "airy", radius: "soft", chrome: "fill", controls: "pill", icons: "line", iconPack: "phosphor", motion: "standard" },
+    };
+    const DENSITY = {
+      dense: { "--row": "36px", "--pad": "12px", "--section": "16px", "--control": "32px", "--title": "600 16px/1.25 ui-sans-serif, system-ui, sans-serif", "--body": "400 13px/20px ui-sans-serif, system-ui, sans-serif" },
+      mixed: { "--row": "48px", "--pad": "16px", "--section": "24px", "--control": "44px", "--title": "600 22px/1.25 ui-sans-serif, system-ui, sans-serif", "--body": "400 16px/24px ui-sans-serif, system-ui, sans-serif" },
+      airy: { "--row": "56px", "--pad": "24px", "--section": "48px", "--control": "48px", "--title": "600 28px/1.2 ui-sans-serif, system-ui, sans-serif", "--body": "400 16px/28px ui-sans-serif, system-ui, sans-serif" },
+    };
+    const RADIUS = {
+      none: { "--r-sm": "0px", "--r-md": "0px", "--r-lg": "0px" },
+      sharp: { "--r-sm": "2px", "--r-md": "4px", "--r-lg": "8px" },
+      standard: { "--r-sm": "4px", "--r-md": "8px", "--r-lg": "12px" },
+      soft: { "--r-sm": "10px", "--r-md": "16px", "--r-lg": "20px" },
+      round: { "--r-sm": "14px", "--r-md": "20px", "--r-lg": "28px" },
+    };
+    const CHROME = {
+      outline: { "--bw": "1px", "--card-bw": "1px", "--div": "1px", "--field": "var(--surface)" },
+      fill: { "--bw": "0px", "--card-bw": "0px", "--div": "0px", "--field": "var(--canvas)" },
+      mixed: { "--bw": "1px", "--card-bw": "0px", "--div": "1px", "--field": "var(--surface)" },
+    };
+    const MOTION = {
+      none: { "--motion": "0ms", "--ease": "linear", "--shift": "0px" },
+      subtle: { "--motion": "120ms", "--ease": "ease", "--shift": "4px" },
+      standard: { "--motion": "180ms", "--ease": "cubic-bezier(0.2, 0, 0, 1)", "--shift": "8px" },
+    };
+
+    const state = {
+      surface: "web",
+      viewport: "desktop",
+      density: "mixed",
+      radius: "standard",
+      chrome: "outline",
+      controls: "rect",
+      icons: "line",
+      iconPack: "phosphor",
+      motion: "standard",
+      theme: "light",
+      frame: "desktop",
+    };
+
+    function icon(name, solid) {
+      const stroke = solid ? "none" : "currentColor";
+      const fill = solid ? "currentColor" : "none";
+      const sw = 'stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"';
+      if (name === "inbox") return `<svg viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" ${sw}><path d="M4 13h4l2 3h4l2-3h4v5H4z"/><path d="M4 13V6h16v7"/></svg>`;
+      if (name === "home") return `<svg viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" ${sw}><path d="M4 11 12 4l8 7v9H4z"/></svg>`;
+      if (name === "search") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ${sw}><circle cx="11" cy="11" r="6"/><path d="m20 20-3.5-3.5"/></svg>`;
+      if (name === "menu") return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ${sw}><path d="M4 7h16M4 12h16M4 17h16"/></svg>`;
+      if (name === "more") return `<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="6" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="18" cy="12" r="1.7"/></svg>`;
+      return `<svg viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" ${sw}><path d="M7 3h8l5 5v13H7z"/><path d="M15 3v6h6"/></svg>`;
+    }
+
+    function items(kind) {
+      return [
+        ["INV-1842", "Maya Chen · sent", true],
+        ["INV-1841", "North Studio · paid", false],
+        ["INV-1840", "Draft", false],
+      ].map(([t, m, more], i) => `
+        <div class="item${kind === "desktop" && i === 0 ? " on" : ""}">
+          <span class="ico">${icon("file", state.icons === "solid")}</span>
+          <div><b>${t}</b><br /><span>${m}</span></div>
+          ${more ? `<button class="more" type="button" data-open="popover" aria-label="More actions"><span class="ico">${icon("more", true)}</span></button>` : ""}
+        </div>`).join("");
+    }
+
+    function formBlock(kind) {
+      const confirm = kind === "phone" ? "sheet" : "dialog";
+      return `
+        <div class="form">
+          <label>Email
+            <input value="maya@studio.com" readonly />
+          </label>
+          <div class="actions">
+            <button class="btn" type="button" data-open="${confirm}">Issue invoice</button>
+            <button class="btn btn-sec" type="button">Cancel</button>
+          </div>
+        </div>`;
+    }
+
+    function emptyBlock() {
+      return `
+        <div class="empty">
+          <span class="ico">${icon("inbox", state.icons === "solid")}</span>
+          <h3>No orders yet</h3>
+          <p>They appear here after the first payment.</p>
+          <button class="btn" type="button" data-open="toast">Create invoice</button>
+        </div>`;
+    }
+
+    function overlayBlock(kind) {
+      const confirm = kind === "phone"
+        ? `<div class="sheet">
+            <div class="grabber"></div>
+            <h4>Issue this invoice?</h4>
+            <p>INV-1842 will be sent to Maya Chen.</p>
+            <div class="actions">
+              <button class="btn" type="button" data-close>Send</button>
+              <button class="btn btn-sec" type="button" data-close>Cancel</button>
+            </div>
+          </div>`
+        : `<div class="dialog">
+            <h4>Issue this invoice?</h4>
+            <p>INV-1842 will be sent to Maya Chen.</p>
+            <div class="actions">
+              <button class="btn" type="button" data-close>Send</button>
+              <button class="btn btn-sec" type="button" data-close>Cancel</button>
+            </div>
+          </div>`;
+      return `
+        <div class="layer" data-layer>
+          <div class="scrim" data-close></div>
+          <div class="popover">
+            <div class="menu-row">Duplicate</div>
+            <div class="menu-row">Share link</div>
+            <div class="menu-row danger">Delete</div>
+          </div>
+          ${confirm}
+          <div class="toast">Invoice created. It appears in the list.</div>
+        </div>`;
+    }
+
+    function phoneChrome() {
+      if (state.surface === "ios") {
+        return `
+          <div class="status"><span>9:41</span><i><span class="dot"></span><span class="dot"></span><span class="bar-cap"></span></i></div>
+          <div class="nav large"><h3>Invoices</h3><span>Last 7 days</span></div>`;
+      }
+      if (state.surface === "android") {
+        return `
+          <div class="status"><span>9:41</span><i><span class="dot"></span><span class="dot"></span><span class="bar-cap"></span></i></div>
+          <div class="android-bar">
+            <span class="ico">${icon("menu", false)}</span>
+            Invoices
+          </div>`;
+      }
+      return `
+        <div class="status"><span>9:41</span><i><span class="dot"></span><span class="dot"></span><span class="bar-cap"></span></i></div>
+        <div class="nav"><span>Invoices</span><span class="chip">Last 7 days</span></div>`;
+    }
+
+    function tabbar() {
+      const solid = state.icons === "solid";
+      return `
+        <div class="tabbar">
+          <div class="tab"><span class="ico">${icon("home", solid)}</span>Home</div>
+          <div class="tab on"><span class="ico">${icon("file", solid)}</span>Invoices</div>
+          <div class="tab"><span class="ico">${icon("search", false)}</span>Search</div>
+        </div>`;
+    }
+
+    function bindLayer(root) {
+      const layer = root.querySelector("[data-layer]");
+      if (!layer) return;
+      const close = () => { layer.className = "layer"; };
+      root.querySelectorAll("[data-open]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const kind = btn.dataset.open;
+          layer.className = kind === "toast" ? "layer toast-open" : `layer open ${kind}-open`;
+          if (kind === "toast") setTimeout(close, 1800);
+        });
+      });
+      layer.querySelectorAll("[data-close]").forEach((el) => {
+        el.addEventListener("click", close);
+      });
+      root.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") close();
+      });
+    }
+
+    function paint() {
+      const root = document.documentElement;
+      Object.entries({
+        ...DENSITY[state.density],
+        ...RADIUS[state.radius],
+        ...CHROME[state.chrome],
+        ...MOTION[state.motion],
+        "--r-ctrl": state.controls === "pill" ? "999px" : "var(--r-md)",
+      }).forEach(([k, v]) => root.style.setProperty(k, v));
+
+      const phone = document.getElementById("phone");
+      const desk = document.getElementById("desktop");
+      phone.dataset.chrome = state.chrome;
+      desk.dataset.chrome = state.chrome;
+      phone.dataset.theme = state.theme;
+      desk.dataset.theme = state.theme;
+      const shell = document.querySelector(".phone-shell");
+      shell.classList.toggle("tablet", state.viewport === "tablet");
+      const device =
+        state.viewport === "tablet"
+          ? (state.surface === "android" ? "Tablet · Android" : state.surface === "ios" ? "iPad" : "Tablet · web")
+          : (state.surface === "ios" ? "iPhone" : state.surface === "android" ? "Android" : "Phone · web");
+      document.getElementById("phone-label").textContent = device;
+
+      const phoneList = `<div class="list">${items("phone")}</div>`;
+      const deskList = `<div class="list">${items("desktop")}</div>`;
+      const showTabs = state.surface !== "web";
+      phone.innerHTML = `
+        ${phoneChrome()}
+        <div class="content">
+          ${state.chrome === "fill" ? phoneList : `<div class="app">${phoneList}</div>`}
+          <div class="app">${formBlock("phone")}</div>
+          <div class="app">${emptyBlock()}</div>
+        </div>
+        ${showTabs ? tabbar() : ""}
+        ${overlayBlock("phone")}`;
+
+      desk.innerHTML = `
+        <div class="desk-toolbar">
+          <h3>Invoices</h3>
+          <div class="desk-tools">
+            <span class="chip">Last 7 days</span>
+            <button class="btn" type="button" data-open="dialog">New</button>
+          </div>
+        </div>
+        <div class="desk-stack">
+          <div class="app">
+            <div class="bar"><span>Open</span><span>3</span></div>
+            ${deskList}
+          </div>
+          <div class="app">${formBlock("desktop")}</div>
+          <div class="app">${emptyBlock()}</div>
+        </div>
+        ${overlayBlock("desktop")}`;
+
+      const summary = `${state.surface} · ${state.viewport} · ${state.density} · ${state.radius} · ${state.chrome} · ${state.iconPack} ${state.icons}`;
+      document.getElementById("summary").textContent = summary;
+      showFrame(state.frame);
+
+      bindLayer(phone);
+      bindLayer(desk);
+
+      const flags = [
+        `--surface ${state.surface}`,
+        `--viewport ${state.viewport}`,
+        `--density ${state.density}`,
+        `--radius ${state.radius}`,
+        `--chrome ${state.chrome}`,
+        `--controls ${state.controls}`,
+        `--icons ${state.icons}`,
+        `--icon-pack ${state.iconPack}`,
+        `--motion ${state.motion}`,
+      ].join(" ");
+      const keys = ["surface", "viewport", "density", "radius", "chrome", "controls", "icons", "iconPack", "motion"];
+      const match = Object.entries(PRESETS).find(([, p]) => keys.every((k) => p[k] === state[k]));
+      document.getElementById("cmd").textContent = match
+        ? `node scripts/apply-system.mjs . --profile ${match[0]}`
+        : `node scripts/apply-system.mjs . ${flags}`;
+      syncPressed();
+    }
+
+    function showFrame(id) {
+      state.frame = id;
+      document.querySelectorAll(".frame").forEach((el) => {
+        el.classList.toggle("on", el.dataset.frame === id);
+      });
+      document.querySelectorAll("#preview-tabs button").forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(btn.dataset.frame === id));
+      });
+      document.getElementById("frame-hint").textContent =
+        id === "phone"
+          ? "16 gutter, grouped rows, sheet. Same tokens as desktop."
+          : "Stacked list, form, empty. One panel, dialog. Not a phone column.";
+    }
+
+    function syncPressed() {
+      document.querySelectorAll("[data-key]").forEach((btn) => {
+        btn.setAttribute("aria-pressed", String(state[btn.dataset.key] === btn.dataset.val));
+      });
+      document.querySelectorAll("[data-preset]").forEach((btn) => {
+        const p = PRESETS[btn.dataset.preset];
+        const on = ["surface", "density", "radius", "chrome", "controls", "icons", "iconPack", "motion"].every((k) => p[k] === state[k]);
+        btn.setAttribute("aria-pressed", String(on));
+      });
+    }
+
+    function group(el, key, items) {
+      items.forEach(([val, label]) => {
+        const b = document.createElement("button");
+        b.className = "opt";
+        b.type = "button";
+        b.dataset.key = key;
+        b.dataset.val = val;
+        b.textContent = label;
+        b.addEventListener("click", () => { state[key] = val; paint(); });
+        el.appendChild(b);
+      });
+    }
+
+    Object.entries(PRESETS).forEach(([id, p]) => {
+      const b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.dataset.preset = id;
+      b.innerHTML = `${p.label}<small>${p.hint}</small>`;
+      b.addEventListener("click", () => {
+        ["surface", "viewport", "density", "radius", "chrome", "controls", "icons", "iconPack", "motion"].forEach((k) => {
+          state[k] = p[k];
+        });
+        state.frame = p.viewport === "desktop" ? "desktop" : "phone";
+        paint();
+        if (window.matchMedia("(max-width: 860px)").matches) setLookOpen(false);
+      });
+      document.getElementById("presets").appendChild(b);
+    });
+
+    group(document.getElementById("surface"), "surface", [["web", "Web"], ["ios", "iOS"], ["android", "Android"]]);
+    group(document.getElementById("viewport"), "viewport", [["phone", "Phone"], ["tablet", "Tablet"], ["desktop", "Desktop"]]);
+    group(document.getElementById("density"), "density", [["dense", "Dense"], ["mixed", "Mixed"], ["airy", "Airy"]]);
+    group(document.getElementById("radius"), "radius", [["none", "None"], ["sharp", "Sharp"], ["standard", "Std"], ["soft", "Soft"], ["round", "Round"]]);
+    group(document.getElementById("chrome"), "chrome", [["outline", "Outline"], ["fill", "Fill"], ["mixed", "Mixed"]]);
+    group(document.getElementById("controls"), "controls", [["rect", "Rect"], ["pill", "Pill"]]);
+    group(document.getElementById("icons"), "icons", [["line", "Line"], ["solid", "Solid"]]);
+    group(document.getElementById("iconPack"), "iconPack", [
+      ["phosphor", "Phosphor"],
+      ["heroicons", "Heroicons"],
+      ["tabler", "Tabler"],
+      ["iconoir", "Iconoir"],
+      ["sf-symbols", "SF Symbols"],
+      ["material-symbols", "Material"],
+      ["fluent", "Fluent"],
+      ["carbon", "Carbon"],
+    ]);
+    group(document.getElementById("motion"), "motion", [["none", "None"], ["subtle", "Subtle"], ["standard", "Standard"]]);
+    group(document.getElementById("theme"), "theme", [["light", "Light"], ["dark", "Dark"]]);
+
+    document.getElementById("preview-tabs").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-frame]");
+      if (!btn) return;
+      showFrame(btn.dataset.frame);
+    });
+
+    document.getElementById("viewport").addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-val]");
+      if (!btn) return;
+      if (btn.dataset.val === "desktop") showFrame("desktop");
+      if (btn.dataset.val === "phone" || btn.dataset.val === "tablet") showFrame("phone");
+    });
+
+    function copyCommand(btn, doneLabel) {
+      const text = document.getElementById("cmd").textContent;
+      const start = btn.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = doneLabel;
+        setTimeout(() => { btn.textContent = start; }, 1200);
+      }).catch(() => {
+        btn.textContent = "Copy failed";
+        setTimeout(() => { btn.textContent = start; }, 1600);
+      });
+    }
+
+    function setLookOpen(open) {
+      document.getElementById("look").classList.toggle("open", open);
+      document.getElementById("look-scrim").classList.toggle("on", open);
+      document.getElementById("look-scrim").hidden = !open;
+      document.getElementById("toggle-look").setAttribute("aria-pressed", String(open));
+    }
+
+    document.getElementById("copy").addEventListener("click", () => {
+      copyCommand(document.getElementById("copy"), "Copied");
+    });
+    document.getElementById("copy-top").addEventListener("click", () => {
+      copyCommand(document.getElementById("copy-top"), "Copied");
+    });
+    document.getElementById("toggle-look").addEventListener("click", () => {
+      setLookOpen(!document.getElementById("look").classList.contains("open"));
+    });
+    document.getElementById("look-scrim").addEventListener("click", () => setLookOpen(false));
+
+    paint();
+  </script>
+</body>
+</html>

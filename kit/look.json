@@ -1,0 +1,132 @@
+{
+  "density": {
+    "dense": {
+      "--pd-row": "36px",
+      "--pd-pad": "12px",
+      "--pd-section": "16px",
+      "--pd-control": "32px",
+      "--pd-text-title": "600 16px/1.25 var(--pd-font-sans)",
+      "--pd-text-body": "400 13px/20px var(--pd-font-sans)"
+    },
+    "mixed": {
+      "--pd-row": "48px",
+      "--pd-pad": "16px",
+      "--pd-section": "24px",
+      "--pd-control": "44px",
+      "--pd-text-title": "600 22px/1.25 var(--pd-font-sans)",
+      "--pd-text-body": "400 16px/24px var(--pd-font-sans)"
+    },
+    "airy": {
+      "--pd-row": "56px",
+      "--pd-pad": "24px",
+      "--pd-section": "48px",
+      "--pd-control": "48px",
+      "--pd-text-title": "600 28px/1.2 var(--pd-font-sans)",
+      "--pd-text-body": "400 16px/28px var(--pd-font-sans)"
+    }
+  },
+  "radius": {
+    "none": { "--pd-radius-sm": "0px", "--pd-radius-md": "0px", "--pd-radius-lg": "0px" },
+    "sharp": { "--pd-radius-sm": "2px", "--pd-radius-md": "4px", "--pd-radius-lg": "8px" },
+    "standard": { "--pd-radius-sm": "4px", "--pd-radius-md": "8px", "--pd-radius-lg": "12px" },
+    "soft": { "--pd-radius-sm": "10px", "--pd-radius-md": "16px", "--pd-radius-lg": "20px" },
+    "round": { "--pd-radius-sm": "14px", "--pd-radius-md": "20px", "--pd-radius-lg": "28px" }
+  },
+  "viewport": {
+    "phone": { "--pd-gutter": "16px" },
+    "tablet": { "--pd-gutter": "24px" },
+    "desktop": { "--pd-gutter": "32px" }
+  },
+  "motion": {
+    "none": { "--pd-motion": "0ms", "--pd-ease": "linear", "--pd-motion-shift": "0px" },
+    "subtle": { "--pd-motion": "120ms", "--pd-ease": "ease", "--pd-motion-shift": "4px" },
+    "standard": { "--pd-motion": "180ms", "--pd-ease": "cubic-bezier(0.2, 0, 0, 1)", "--pd-motion-shift": "8px" }
+  },
+  "chrome": {
+    "outline": {
+      "--pd-border-width": "1px",
+      "--pd-card-border": "1px",
+      "--pd-divider": "1px",
+      "--pd-field-bg": "var(--pd-color-surface)"
+    },
+    "fill": {
+      "--pd-border-width": "0px",
+      "--pd-card-border": "0px",
+      "--pd-divider": "0px",
+      "--pd-field-bg": "var(--pd-color-canvas)"
+    },
+    "mixed": {
+      "--pd-border-width": "1px",
+      "--pd-card-border": "0px",
+      "--pd-divider": "1px",
+      "--pd-field-bg": "var(--pd-color-surface)"
+    }
+  },
+  "presets": {
+    "console": {
+      "label": "Console",
+      "hint": "Dense web tools",
+      "surface": "web",
+      "viewport": "desktop",
+      "density": "dense",
+      "radius": "sharp",
+      "chrome": "outline",
+      "controls": "rect",
+      "icons": "line",
+      "iconPack": "tabler",
+      "motion": "subtle"
+    },
+    "product": {
+      "label": "Product",
+      "hint": "SaaS default",
+      "surface": "web",
+      "viewport": "desktop",
+      "density": "mixed",
+      "radius": "standard",
+      "chrome": "outline",
+      "controls": "rect",
+      "icons": "line",
+      "iconPack": "phosphor",
+      "motion": "standard"
+    },
+    "soft-app": {
+      "label": "Soft app",
+      "hint": "Phone, no hairlines",
+      "surface": "ios",
+      "viewport": "phone",
+      "density": "mixed",
+      "radius": "round",
+      "chrome": "fill",
+      "controls": "pill",
+      "icons": "line",
+      "iconPack": "sf-symbols",
+      "motion": "standard"
+    },
+    "material": {
+      "label": "Material",
+      "hint": "Android app",
+      "surface": "android",
+      "viewport": "phone",
+      "density": "mixed",
+      "radius": "soft",
+      "chrome": "fill",
+      "controls": "rect",
+      "icons": "solid",
+      "iconPack": "material-symbols",
+      "motion": "standard"
+    },
+    "editorial": {
+      "label": "Editorial",
+      "hint": "Marketing and first-run",
+      "surface": "web",
+      "viewport": "desktop",
+      "density": "airy",
+      "radius": "soft",
+      "chrome": "fill",
+      "controls": "pill",
+      "icons": "line",
+      "iconPack": "phosphor",
+      "motion": "standard"
+    }
+  }
+}
